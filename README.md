@@ -52,3 +52,18 @@ http localhost:8080/v1/wavelet_hash < source.jpg
     "wavelet_hash": "ff7e780208487c5e"
 }
 ```
+
+### Hashes
+
+```bash
+http localhost:8080/v1/hashes < source.jpg
+```
+
+```json
+{
+    "average_hash": "fe7838020078785e",
+    "difference_hash": "6f2d0d4b232f2f6b",
+    "perception_hash": "212bb9e187f19971",
+    "wavelet_hash": "ff7e780208487c5e"
+}
+```
