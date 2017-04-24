@@ -66,7 +66,11 @@ class V1(object):
     @cherrypy.tools.json_out()
     def colors(self, n):
         image = V1.read_image()
-        return compute_top_colors_of_image(image, int(n))
+        try:
+            n = int(n)
+        except ValueError:
+            raise cherrypy.HTTPError(400, 'Parameter n must be valid int')
+        return compute_top_colors_of_image(image, n)
 
 
 if __name__ == '__main__':
