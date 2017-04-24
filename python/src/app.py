@@ -4,6 +4,8 @@ import cherrypy
 import imagehash
 import json
 
+from src.colors import compute_top_colors_of_image
+
 
 def jsonify_error(status, message, traceback, version):
     response = cherrypy.response
@@ -59,6 +61,12 @@ class V1(object):
                 'difference_hash': difference,
                 'perception_hash': perception,
                 'wavelet_hash': wavelet}
+
+    @cherrypy.expose
+    @cherrypy.tools.json_out()
+    def colors(self, n):
+        image = V1.read_image()
+        return compute_top_colors_of_image(image, int(n))
 
 
 if __name__ == '__main__':
