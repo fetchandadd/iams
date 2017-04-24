@@ -2,6 +2,13 @@ from PIL import Image
 from types import SimpleNamespace
 import cherrypy
 import imagehash
+import json
+
+
+def jsonify_error(status, message, traceback, version):
+    response = cherrypy.response
+    response.headers['Content-Type'] = 'application/json'
+    return json.dumps({'status': status, 'message': message})
 
 
 class V1(object):
