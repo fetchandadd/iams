@@ -28,18 +28,18 @@ def restrict_number_of_colors(colors, number_of_colors):
 
 
 def normalize_frequency(colors_counted):
-    count_of_pixels = count_pixels(colors_counted)
-    for key, value in colors_counted.items():
-        colors_counted[key] = round(value / count_of_pixels,
-                                    frequency_round_digits)
+    base_value = summarize_frequencies(colors_counted)
+    for hex_color, frequency in colors_counted.items():
+        colors_counted[hex_color] = round(frequency / base_value,
+                                          frequency_round_digits)
     return colors_counted
 
 
-def count_pixels(color):
-    i = 0
-    for key, value in color.items():
-        i += value
-    return i
+def summarize_frequencies(color):
+    sum = 0
+    for _, frequency in color.items():
+        sum += frequency
+    return sum
 
 
 def build_result_color_list(color_hex, colors_counted, html_colors):
