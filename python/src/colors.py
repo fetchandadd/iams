@@ -76,13 +76,13 @@ def convert_frequency_rgb_tuple_to_dict(frequency_rgb_tuple):
 
 
 def count_color_classes(colors):
-    arr = {}
+    color_dict = {}
     for color in colors:
         try:
-            arr[color['color_class']] += color['frequency']
+            color_dict[color['color_class']] += color['frequency']
         except KeyError:
-            arr[color['color_class']] = color['frequency']
-    return arr
+            color_dict[color['color_class']] = color['frequency']
+    return color_dict
 
 
 def sort_colors_by_frequency(colors):
