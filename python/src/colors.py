@@ -1,5 +1,6 @@
+from colors_database import html_colors_list
+from colors_database import html_colors_dict
 from typing import List, Dict
-import json
 import math
 
 # config
@@ -11,13 +12,11 @@ max_colors = 256
 
 
 def compute_top_colors_of_image(image, number_of_colors: int = 5):
-    html_colors = load_html_colors()
-    html_color_values = list(html_colors.values())
     colors = get_colors_from_image(image)
-    colors = classify_color_list(colors, html_color_values)
+    colors = classify_color_list(colors, html_colors_list)
     colors = count_color_classes(colors)
     colors = normalize_frequency(colors)
-    colors = build_result_color_list(colors, html_colors)
+    colors = build_result_color_list(colors, html_colors_dict)
     colors = sort_colors_by_frequency(colors)
     number_of_colors = restrict_number_of_colors(colors, number_of_colors)
     return colors[:number_of_colors]
@@ -63,11 +62,6 @@ def get_colors_from_image(image) -> List:
     image = image.convert("RGB")
     colors = image.getcolors(maxcolors=max_colors)
     return list(map(convert_frequency_rgb_tuple_to_dict, colors))
-
-
-def load_html_colors() -> Dict:
-    with open('./colors.json') as color_file:
-        return json.load(color_file)
 
 
 def build_color(color: List) -> Dict:
