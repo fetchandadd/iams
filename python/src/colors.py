@@ -1,11 +1,10 @@
-from colors_database import html_colors_list
 from colors_database import html_colors_dict
+from colors_database import html_colors_list
 from typing import List, Dict
+import cherrypy
 import math
 
 # config
-import cherrypy
-
 frequency_round_digits = 4
 thumbnail_size = 16, 16
 max_colors = 256
