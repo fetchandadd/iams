@@ -25,12 +25,15 @@ def restrict_number_of_colors(colors: List, number_of_colors: int) -> int:
     return max(1, min(len(colors), number_of_colors))
 
 
-def normalize_frequency(colors_counted: Dict) -> Dict:
-    base_value = summarize_frequencies(colors_counted)
-    for hex_color, frequency in colors_counted.items():
-        colors_counted[hex_color] = round(frequency / base_value,
-                                          frequency_round_digits)
-    return colors_counted
+def normalize_frequency(colors: Dict) -> Dict:
+    base = summarize_frequencies(colors)
+    for hex_color, frequency in colors.items():
+        colors[hex_color] = normalize_frequency_and_round(frequency, base)
+    return colors
+
+
+def normalize_frequency_and_round(frequency, base):
+    return round(frequency / base, frequency_round_digits)
 
 
 def summarize_frequencies(color: Dict) -> int:
