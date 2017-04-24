@@ -54,11 +54,10 @@ def build_result_item(hex_color, frequencies, html_colors):
 
 
 def get_colors_from_image(image):
-    test_image_pillow = image.copy()
-    test_image_pillow.thumbnail(size=thumbnail_size)
-    test_image_pillow = test_image_pillow.convert("RGB")
-    image_colors_rgb = test_image_pillow.getcolors(maxcolors=max_colors)
-    return list(map(convert_frequency_rgb_tuple_to_dict, image_colors_rgb))
+    image.thumbnail(size=thumbnail_size)
+    image = image.convert("RGB")
+    colors = image.getcolors(maxcolors=max_colors)
+    return list(map(convert_frequency_rgb_tuple_to_dict, colors))
 
 
 def load_html_colors():
@@ -72,9 +71,8 @@ def build_color(color):
 
 
 def convert_frequency_rgb_tuple_to_dict(frequency_rgb_tuple):
-    frequency = frequency_rgb_tuple[0]
-    rgb = frequency_rgb_tuple[1]
-    return {'frequency': frequency, 'rgb': build_color(rgb)}
+    return {'frequency': frequency_rgb_tuple[0],
+            'rgb': build_color(frequency_rgb_tuple[1])}
 
 
 def count_color_classes(colors):
@@ -88,7 +86,8 @@ def count_color_classes(colors):
 
 
 def sort_colors_by_frequency(colors):
-    return sorted(colors, key=lambda color: color['frequency'],
+    return sorted(colors,
+                  key=lambda color: color['frequency'],
                   reverse=True)
 
 
@@ -112,9 +111,9 @@ def classify_color(frequency_rgb_dict, html_color_values):
 
 def get_color_class(color, html_color_values):
     """{'r': 0, 'g': 0, 'b':0} -> 000000"""
-    return min(distance_to_color_class(color, html_color_values),
-               key=lambda x: x['distance'])[
-        'hex']
+    color_distance_list = distance_to_color_class(color, html_color_values)
+    closest_color = min(color_distance_list, key=lambda x: x['distance'])
+    return closest_color['hex']
 
 
 def distance_to_color_class(target_color, html_color_values):
