@@ -14,8 +14,7 @@ def compute_top_colors_of_image(image, number_of_colors=5):
     colors = classify_color_list(colors, html_color_values)
     colors = count_color_classes(colors)
     colors = normalize_frequency(colors)
-    colors = build_result_color_list(colors,
-                                     html_colors)
+    colors = build_result_color_list(colors, html_colors)
     colors = sort_colors_by_frequency(colors)
     number_of_colors = restrict_number_of_colors(colors, number_of_colors)
     return colors[:number_of_colors]
@@ -42,9 +41,10 @@ def summarize_frequencies(color):
 
 def build_result_color_list(colors, html_colors):
     colors_hex = list(colors.keys())
-    return list(
-        map(lambda x: build_result_item(x, colors, html_colors),
-            colors_hex))
+    return list(map(lambda x: build_result_item(x,
+                                                colors,
+                                                html_colors),
+                    colors_hex))
 
 
 def build_result_item(hex_color, frequencies, html_colors):
