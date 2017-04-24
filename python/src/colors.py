@@ -62,7 +62,10 @@ def get_colors_from_image(image) -> List:
 
 
 def build_color(color: List) -> Dict:
-    """[0,0,0] -> {'r': 0, 'g': 0, 'b':0}"""
+    """
+    :param color: [0,0,0]
+    :return: {'r': 0, 'g': 0, 'b':0}
+    """
     return {'r': color[0], 'g': color[1], 'b': color[2]}
 
 
@@ -88,7 +91,11 @@ def sort_colors_by_frequency(colors: List) -> List:
 
 
 def euclid_distance(x: Dict, y: Dict) -> float:
-    """{'r':2, 'g':1, 'b':3}, {'r':0, 'g':0, 'b':0} -> 3.7416573868"""
+    """
+    :param x: {'r':2, 'g':1, 'b':3}
+    :param y: {'r':0, 'g':0, 'b':0}
+    :return: 3.7416573868
+    """
     return math.sqrt((x['r'] - y['r']) ** 2 +
                      (x['g'] - y['g']) ** 2 +
                      (x['b'] - y['b']) ** 2)
@@ -105,9 +112,13 @@ def classify_color(frequency_rgb_dict: Dict, html_color_values: List) -> Dict:
             'color_class': color_class}
 
 
-def get_color_class(color: Dict, html_color_values: List) -> int:
-    """{'r': 0, 'g': 0, 'b':0} -> 000000"""
-    color_distance_list = distance_to_color_class(color, html_color_values)
+def get_color_class(color: Dict, html_color: List) -> int:
+    """
+    :param color: {'r': 0, 'g': 0, 'b': 0}
+    :param html_color: [{"name":"Black","hex":"000000","r":0,"g":0,"b":0},...]
+    :return: 000000
+    """
+    color_distance_list = distance_to_color_class(color, html_color)
     closest_color = min(color_distance_list, key=lambda x: x['distance'])
     return closest_color['hex']
 
