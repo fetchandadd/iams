@@ -1,5 +1,6 @@
 from colors_database import html_colors_dict
 from colors_database import html_colors_list
+from functools import reduce
 from typing import List, Dict
 import cherrypy
 import math
@@ -39,10 +40,7 @@ def normalize_frequency_and_round(frequency: int, base: int) -> float:
 
 
 def summarize_frequencies(color: Dict) -> int:
-    summarized = 0
-    for _, frequency in color.items():
-        summarized += frequency
-    return summarized
+    return reduce(lambda x, y: x + y, color.values())
 
 
 def build_result_color_list(colors: Dict, html_colors: Dict) -> List:

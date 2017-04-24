@@ -1,2 +1,3 @@
 /Dockerfile
 /src/cherrypy.conf
+/src/test_colors.py
