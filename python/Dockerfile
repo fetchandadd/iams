@@ -1,4 +1,4 @@
-FROM python:3.4.6-onbuild
+FROM python:3.5.3-onbuild
 
 MAINTAINER Tim Tegler <mail@timtegeler.de>
 
