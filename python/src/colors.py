@@ -10,7 +10,7 @@ thumbnail_size = 16, 16
 max_colors = 256
 
 
-def compute_top_colors_of_image(image, number_of_colors=5):
+def compute_top_colors_of_image(image, number_of_colors: int = 5):
     html_colors = load_html_colors()
     html_color_values = list(html_colors.values())
     colors = get_colors_from_image(image)
@@ -36,7 +36,7 @@ def normalize_frequency(colors: Dict) -> Dict:
     return colors
 
 
-def normalize_frequency_and_round(frequency, base):
+def normalize_frequency_and_round(frequency: int, base: int) -> float:
     return round(frequency / base, frequency_round_digits)
 
 
