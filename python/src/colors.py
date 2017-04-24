@@ -36,10 +36,10 @@ def normalize_frequency(colors_counted):
 
 
 def summarize_frequencies(color):
-    sum = 0
+    summarized = 0
     for _, frequency in color.items():
-        sum += frequency
-    return sum
+        summarized += frequency
+    return summarized
 
 
 def build_result_color_list(color_hex, colors_counted, html_colors):
