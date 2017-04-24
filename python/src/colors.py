@@ -3,6 +3,8 @@ import json
 import math
 
 # config
+import cherrypy
+
 frequency_round_digits = 4
 thumbnail_size = 16, 16
 max_colors = 256
@@ -22,7 +24,9 @@ def compute_top_colors_of_image(image, number_of_colors=5):
 
 
 def restrict_number_of_colors(colors: List, number_of_colors: int) -> int:
-    return max(1, min(len(colors), number_of_colors))
+    if number_of_colors < 1:
+        raise cherrypy.HTTPError(400, 'Parameter n must be greater or equal 1')
+    return min(len(colors), number_of_colors)
 
 
 def normalize_frequency(colors: Dict) -> Dict:
