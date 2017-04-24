@@ -4,7 +4,7 @@ import cherrypy
 import imagehash
 import json
 
-from src.colors import compute_top_colors_of_image
+from colors import compute_top_colors_of_image
 
 
 def jsonify_error(status, message, traceback, version):
