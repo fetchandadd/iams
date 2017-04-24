@@ -117,9 +117,11 @@ def get_color_class(color: Dict, html_color_values: List) -> int:
     return closest_color['hex']
 
 
-def distance_to_color_class(target_color: Dict,
-                            html_color_values: List) -> List:
-    return list(map(lambda x: {'hex': x['hex'],
-                               'distance': euclid_distance(x,
-                                                           target_color)},
-                    html_color_values))
+def distance_to_color_class(target_color: Dict, html_colors: List) -> List:
+    iterator = map(lambda x: build_hex_distance(x, target_color), html_colors)
+    return list(iterator)
+
+
+def build_hex_distance(html_color: Dict, target_color: Dict) -> Dict:
+    distance = euclid_distance(html_color, target_color)
+    return {'hex': html_color['hex'], 'distance': distance}
