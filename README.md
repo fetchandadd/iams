@@ -78,31 +78,31 @@ http localhost:8080/v1/colors n==3 < source.jpg
 [
     {
         "color": {
-            "b": 47,
-            "g": 107,
-            "hex": "556B2F",
             "name": "Dark Olive Green",
-            "r": 85
+            "hex": "556B2F",
+            "r": 85,
+            "g": 107,
+            "b": 47
         },
         "frequency": 0.1875
     },
     {
         "color": {
-            "b": 105,
-            "g": 105,
-            "hex": "696969",
             "name": "Dim Gray",
-            "r": 105
+            "hex": "696969",
+            "r": 105,
+            "g": 105,
+            "b": 105
         },
         "frequency": 0.1528
     },
     {
         "color": {
-            "b": 79,
-            "g": 79,
-            "hex": "2F4F4F",
             "name": "Dark Slate Gray",
-            "r": 47
+            "hex": "2F4F4F",
+            "r": 47,
+            "g": 79,
+            "b": 79
         },
         "frequency": 0.1389
     }
