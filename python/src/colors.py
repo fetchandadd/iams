@@ -45,10 +45,8 @@ def summarize_frequencies(color: Dict) -> int:
 
 def build_result_color_list(colors: Dict, html_colors: Dict) -> List:
     colors_hex = list(colors.keys())
-    return list(map(lambda x: build_item(x,
-                                         colors,
-                                         html_colors),
-                    colors_hex))
+    color_iter = map(lambda x: build_item(x, colors, html_colors), colors_hex)
+    return list(color_iter)
 
 
 def build_item(hex_color: str, frequencies: Dict, html_colors: Dict) -> Dict:
