@@ -1,6 +1,6 @@
 import unittest
 
-from colors import summarize_frequencies
+from colors import summarize_frequencies, count_color_classes
 
 
 class TestColorsFunction(unittest.TestCase):
@@ -11,6 +11,24 @@ class TestColorsFunction(unittest.TestCase):
         self.assertEqual(summarize_frequencies({'000000': 1,
                                                 'AEAEAE': 2,
                                                 'FFFFFF': 3}), 6)
+
+    def test_count_color_classes(self):
+        test_input = [
+            {
+                'frequency': 5,
+                'color_class': '000000'
+            },
+            {
+                'frequency': 4,
+                'color_class': '000000'
+            },
+            {
+                'frequency': 10,
+                'color_class': 'FFFFFF'
+            },
+        ]
+        expected_output = {'000000': 9, 'FFFFFF': 10}
+        self.assertEqual(count_color_classes(test_input), expected_output)
 
 
 if __name__ == '__main__':
