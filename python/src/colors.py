@@ -66,15 +66,14 @@ def summarize_frequencies(color: Dict) -> int:
     return reduce(lambda x, y: x + y, color.values())
 
 
-def build_result_color_list(colors: Dict, html_colors: Dict) -> List:
+def build_result_color_list(colors: Dict, html_colors: Dict) -> map:
     """
     :param colors: ['000000', 'FFFFFF', ... ]
     :param html_colors: {'000000':{'name':'Black', 'hex':'000000', 'r':0, 'g':0, 'b':0}, ...}
     :return: [{'color':{'name':'Black', 'hex':'000000', 'r':0, 'g':0, 'b':0}, 'frequency':0.3}, ...]
     """
-    colors_hex = list(colors.keys())
-    color_iter = map(lambda x: build_item(x, colors, html_colors), colors_hex)
-    return list(color_iter)
+    colors_hex = colors.keys()
+    return map(lambda x: build_item(x, colors, html_colors), colors_hex)
 
 
 def build_item(hex_color: str, frequencies: Dict, html_colors: Dict) -> Dict:
@@ -88,7 +87,7 @@ def build_item(hex_color: str, frequencies: Dict, html_colors: Dict) -> Dict:
             'frequency': frequencies[hex_color]}
 
 
-def get_colors_from_image(image) -> List:
+def get_colors_from_image(image) -> map:
     """
     :param image: Pillow image object
     :return: [[5,[0,0,0], [8,(255,255,255), ...]
@@ -96,7 +95,7 @@ def get_colors_from_image(image) -> List:
     image.thumbnail(size=thumbnail_size)
     image = image.convert('RGB')
     colors = image.getcolors(maxcolors=max_colors)
-    return list(map(convert_frequency_rgb_tuple_to_dict, colors))
+    return map(convert_frequency_rgb_tuple_to_dict, colors)
 
 
 def build_color(color: List) -> Dict:
@@ -116,7 +115,7 @@ def convert_frequency_rgb_tuple_to_dict(frequency_rgb_tuple: List) -> Dict:
             'rgb': build_color(frequency_rgb_tuple[1])}
 
 
-def count_color_classes(colors: List[Dict]) -> Dict:
+def count_color_classes(colors: map) -> Dict:
     """
     :param colors: [{'frequency':5, 'color_class':'000000'}, ...]
     :return: {'000000':5, 'FFFFFF': 8, ... }
@@ -130,7 +129,7 @@ def count_color_classes(colors: List[Dict]) -> Dict:
     return color_dict
 
 
-def sort_colors_by_frequency(colors: List) -> List:
+def sort_colors_by_frequency(colors: map) -> List:
     """
     :param colors: [{'color':{'name':'Black', 'hex':'000000', 'r':0, 'g':0, 'b':0}, 'frequency':0.3}, ...]
     :return: [{'color':{'name':'Blue', 'hex':'0000FF', 'r':0, 'g':0, 'b':255}, 'frequency':0.4}, ...]
@@ -151,13 +150,13 @@ def euclid_distance(x: Dict, y: Dict) -> float:
                      (x['b'] - y['b']) ** 2)
 
 
-def classify_color_list(colors: List, html_color_values: List) -> List:
+def classify_color_list(colors: map, html_color_values: List) -> map:
     """
     :param colors: [{'rgb':{'r':0, 'g':0, 'b':0}, 'frequency':5}, ...]
     :param html_color_values: [{'name':'Black', 'hex':'000000', 'r':0, 'g':0, 'b':0}, ...]
     :return: [{'frequency':5, 'color_class':'000000'}, ...]
     """
-    return list(map(lambda x: classify_color(x, html_color_values), colors))
+    return map(lambda x: classify_color(x, html_color_values), colors)
 
 
 def classify_color(frequency_rgb_dict: Dict, html_color_values: List) -> Dict:
@@ -183,14 +182,13 @@ def get_color_class(color: Dict, html_color: List) -> str:
     return closest_color['hex']
 
 
-def distance_to_color_class(target_color: Dict, html_colors: List) -> List:
+def distance_to_color_class(target_color: Dict, html_colors: List) -> map:
     """
     :param target_color: {'r':0, 'g':0, 'b':0}
     :param html_colors: [{'name':'Black', 'hex':'000000', 'r':0, 'g':0, 'b':0},...]
     :return: [{'hex':'000000', distance:0},...]
     """
-    iterator = map(lambda x: build_hex_distance(x, target_color), html_colors)
-    return list(iterator)
+    return map(lambda x: build_hex_distance(x, target_color), html_colors)
 
 
 def build_hex_distance(html_color: Dict, target_color: Dict) -> Dict:
