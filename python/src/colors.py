@@ -79,7 +79,7 @@ def build_result_color_list(colors: Dict, html_colors: Dict) -> List:
 
 def build_item(hex_color: str, frequencies: Dict, html_colors: Dict) -> Dict:
     """
-    :param hex_color:000000
+    :param hex_color: '000000'
     :param frequencies: {'000000':0.3, 'FFFFFF':0.2, ... }
     :param html_colors:{'000000':{'name':'Black', 'hex':'000000', 'r':0, 'g':0, 'b':0}, ...}
     :return: {'color':{'name':'Black', 'hex':'000000', 'r':0, 'g':0, 'b':0}, 'frequency':5}
@@ -118,7 +118,7 @@ def convert_frequency_rgb_tuple_to_dict(frequency_rgb_tuple: List) -> Dict:
 
 def count_color_classes(colors: List[Dict]) -> Dict:
     """
-    :param colors: [{'frequency':5, 'color_class':000000}, ...]
+    :param colors: [{'frequency':5, 'color_class':'000000'}, ...]
     :return: {'000000':5, 'FFFFFF': 8, ... }
     """
     color_dict = {}
@@ -155,7 +155,7 @@ def classify_color_list(colors: List, html_color_values: List) -> List:
     """
     :param colors: [{'rgb':{'r':0, 'g':0, 'b':0}, 'frequency':5}, ...]
     :param html_color_values: [{'name':'Black', 'hex':'000000', 'r':0, 'g':0, 'b':0}, ...]
-    :return: [{'frequency':5, 'color_class':000000}, ...]
+    :return: [{'frequency':5, 'color_class':'000000'}, ...]
     """
     return list(map(lambda x: classify_color(x, html_color_values), colors))
 
@@ -164,7 +164,7 @@ def classify_color(frequency_rgb_dict: Dict, html_color_values: List) -> Dict:
     """
     :param frequency_rgb_dict: {'rgb':{'r':0, 'g':0, 'b':0}, 'frequency':5}
     :param html_color_values: [{'name':'Black', 'hex':'000000', 'r':0, 'g':0, 'b':0}, ...]
-    :return: {'frequency':5, 'color_class':000000}
+    :return: {'frequency':5, 'color_class':'000000'}
     """
     color_class = get_color_class(frequency_rgb_dict['rgb'],
                                   html_color_values)
@@ -172,11 +172,11 @@ def classify_color(frequency_rgb_dict: Dict, html_color_values: List) -> Dict:
             'color_class': color_class}
 
 
-def get_color_class(color: Dict, html_color: List) -> int:
+def get_color_class(color: Dict, html_color: List) -> str:
     """
     :param color: {'r':0, 'g':0, 'b':0}
     :param html_color: [{'name':'Black', 'hex':'000000', 'r':0, 'g':0, 'b':0},...]
-    :return:000000
+    :return: '000000'
     """
     color_distance_list = distance_to_color_class(color, html_color)
     closest_color = min(color_distance_list, key=lambda x: x['distance'])
