@@ -77,4 +77,4 @@ if __name__ == '__main__':
     root = SimpleNamespace()
     root.v1 = V1()
     cherrypy.quickstart(cherrypy.tree.mount(root, "/"),
-                        config='./cherrypy.conf')
+                        config='./config/cherrypy.conf')
